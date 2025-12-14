@@ -1,0 +1,427 @@
+.hero-section {
+  /* Keep the hero visually proportional by subtracting an estimated navbar height 
+     and making padding responsive with clamp(). */
+  --navbar-height: 70px; /* fallback for navbar height used in min-height calculation */
+  min-height: calc(100vh - var(--navbar-height));
+  background-color: #f8f9fa;
+  padding: clamp(40px, 6vw, 100px) 0; /* responsive padding */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* vertically centers the content */
+}
+
+:root {
+  /* default navbar height fallback used by hero-section min-height calculations */
+  --navbar-height: 70px;
+  /* hero image maximum width defaults (can be adjusted for the whole site) */
+  --hero-img-max: 320px;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    rgba(13, 110, 253, 0.03),
+    rgba(13, 110, 253, 0.08)
+  );
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  z-index: 0;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-image-container {
+  position: relative;
+  padding: clamp(8px, 2vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tweak hero typography for better proportion across screen sizes */
+.hero-section .display-4 {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.05;
+}
+
+.hero-section .lead {
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
+}
+
+.hero-image {
+  /* Use the CSS variable so the max size is consistent and easy to tweak */
+  max-width: var(--hero-img-max);
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.hero-logo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: auto;
+  transform: translateX(20%) translateY(20%);
+  transition: transform 0.3s ease;
+}
+
+.hero-image-container:hover .hero-image {
+  transform: translateY(-10px);
+}
+
+.hero-image-container:hover .hero-logo {
+  transform: translateX(15%) translateY(15%) rotate(5deg);
+}
+
+@media (max-width: 991.98px) {
+  .hero-section {
+    /* For smaller screens, let the hero take only the necessary space so it's not too big */
+    min-height: 0;
+    padding: clamp(24px, 6vw, 60px) 0;
+  }
+
+  .hero-image {
+    max-width: 240px; /* smaller image on tablets and mobile */
+  }
+
+  .hero-logo {
+    width: 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-section {
+    /* Slightly taller section on wide screens but keep balanced */
+    min-height: calc(100vh - var(--navbar-height));
+    padding: clamp(56px, 6vw, 120px) 0;
+  }
+
+  .hero-image {
+    max-width: 360px; /* still sizable on wide screens but not too dominant */
+  }
+}
+.bi-github,
+.bi-linkedin {
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.bi-github:hover,
+.bi-linkedin:hover {
+  color: #0d6efd !important;
+  transform: scale(1.1);
+}
+.navbar {
+  z-index: 1030;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Scroll progress bar inside navbar */
+.navbar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px; /* default thickness */
+  background: transparent; /* transparent track */
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  z-index: 2000; /* ensure it's above nav content */
+  pointer-events: none; /* don't block clicks */
+}
+.navbar-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0d6efd 0%, #b47bfe 100%);
+  transition: width 160ms linear; /* smooth progress feel */
+}
+
+@media (max-width: 767.98px) {
+  .navbar-progress {
+    height: 3px; /* slightly smaller on mobile */
+  }
+}
+
+.navbar-brand img {
+  height: 50px;
+  width: auto;
+}
+
+.navbar .nav-link {
+  padding: 0.5rem 1rem !important;
+  margin: 0 0.2rem;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px; /* Adjust based on navbar height */
+}
+
+/* Active navigation link styles */
+.navbar-nav .nav-link.active {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+/* Project card styling */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Skill card styles */
+.skill-card {
+  min-height: 220px; /* ensures cards align */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.skill-card i {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.skill-card h4 {
+  font-size: 1.05rem;
+}
+
+.skill-card p {
+  color: #6c757d;
+  margin-top: auto; /* keep description at bottom if short */
+}
+
+@media (max-width: 576px) {
+  .skill-card {
+    min-height: 180px;
+  }
+}
+
+.section-title {
+  margin-bottom: 0.25rem;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.footer .social-links {
+  margin-bottom: 1rem;
+}
+
+.footer .social-links a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  transform: translateY(-3px);
+}
+
+.footer-email {
+  color: #0d6efd;
+  font-weight: 500;
+}
+
+.footer-email:hover {
+  color: #0b5ed7;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+/* Make footer sticky */
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* About section styles */
+.about-section {
+  position: relative;
+  background-color: #fff;
+}
+
+.section-title {
+  font-weight: 700;
+  color: #2d2d2d;
+  position: relative;
+  display: inline-block;
+}
+
+.section-line {
+  width: 80px;
+  height: 3px;
+  background-color: #0d6efd;
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.5rem 1rem;
+  background-color: #e7f1ff;
+  color: #0d6efd;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.about-content {
+  position: relative;
+}
+
+/* Remove link underline inside detail/about cards and keep a subtle hover color change */
+.detail-card a,
+.about-details a {
+  text-decoration: none;
+  color: #0d6efd; /* keep link color consistent */
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.detail-card a:hover,
+.about-details a:hover {
+  text-decoration: none;
+  color: #0b5ed7;
+}
+
+.detail-card {
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.status-badge .bi-circle-fill {
+  font-size: 0.5rem;
+}
+
+.about-details {
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.about-details ul li {
+  color: #6c757d;
+}
+
+.about-details ul li strong {
+  color: #2d2d2d;
+  margin-right: 0.5rem;
+}
+
+.detail-card i {
+  color: #0d6efd;
+}
+
+@media (max-width: 991.98px) {
+  .about-content {
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .about-tags {
+    justify-content: center;
+  }
+}
+
+/* Contact section styles */
+.contact-card {
+  border-radius: 6px;
+}
+
+.contact-card h5 {
+  font-weight: 600;
+}
+
+.contact-card a {
+  color: #0d6efd;
+}
+
+.contact-card a:hover {
+  color: #0b5ed7;
+  text-decoration: underline;
+}
+
+/* Improve form feedback visibility */
+.was-validated .form-control:invalid {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.was-validated .form-control:valid {
+  border-color: #198754;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px) {
+  .footer .social-links {
+    margin-top: 0.5rem;
+  }
+}
